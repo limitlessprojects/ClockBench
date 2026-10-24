@@ -1,0 +1,30 @@
+# ClockBench dataset manifest v0.1
+# Roles: eval (primary scoreboard) | eval-caution (possible training overlap, see leakage ledger)
+# Training sources are documented per clock in specs/benchmark-spec-v0.1.md
+version: "0.1"
+datasets:
+  - accession: GSE40279
+    label: "Hannum 2013 whole blood"
+    platform: Illumina 450k
+    n: 656
+    age_range: "19-101"
+    tissue: whole blood
+    role: eval-caution
+    leakage_note: "Training set for Hannum2013; likely inside Horvath2013 multi-cohort training. Scored only for clocks proven non-overlapping; always flagged."
+  - accession: GSE87571
+    label: "EPIC whole blood cohort"
+    platform: Illumina EPIC
+    n: ~723
+    tissue: whole blood
+    role: eval
+    leakage_note: "Post-2013 EPIC cohort; presumed outside first-gen clock training. Verify against GrimAge2 (2022) training corpora before v0.2 scores."
+  - accession: GSE112618
+    label: "EPIC blood cohort (biolearn catalog)"
+    platform: Illumina EPIC
+    tissue: whole blood
+    role: eval
+    leakage_note: "Cataloged by biolearn library.yaml; overlap check required against second-gen training corpora."
+expansion_source: "biolearn/data/library.yaml (credit + cross-check) and community nominations via issue"
+manifest_rules:
+  - "A dataset never moves roles without a public changelog entry."
+  - "Every scored artifact references this manifest's version."
